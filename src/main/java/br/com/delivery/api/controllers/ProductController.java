@@ -5,10 +5,7 @@ import br.com.delivery.api.models.Product;
 import br.com.delivery.api.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/products")
@@ -24,6 +21,12 @@ public class ProductController {
     public ResponseEntity<?> createProduct(@RequestBody ProductRequest product) {
         productService.createProduct(product);
         return ResponseEntity.ok("Produto criado com sucesso!");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateProduct(@PathVariable Integer id, @RequestBody ProductRequest updatedProduct) {
+        productService.updatedProduct(id, updatedProduct);
+        return ResponseEntity.ok("Produto alterado com sucesso!");
     }
 
 

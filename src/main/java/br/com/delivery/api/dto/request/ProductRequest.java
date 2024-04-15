@@ -1,5 +1,7 @@
 package br.com.delivery.api.dto.request;
 
+import br.com.delivery.api.models.Product;
+
 public class ProductRequest {
 
     private String name;
@@ -20,4 +22,5 @@ public class ProductRequest {
     public void setPrice(Integer price) {
         this.price = price;
     }
+
 }
