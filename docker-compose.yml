@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+
+  serverpostgresql:
+    image: postgres:latest
+    container_name: serverpostgresql
+    hostname: serverpostgresql
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: server
+      POSTGRES_USER: server
+      POSTGRES_PASSWORD: server
+    ports:
+      - "5432:5432"
+    networks:
+      - delivery-api-rest
+
+networks:
+  delivery-api-rest:
+    driver: bridge

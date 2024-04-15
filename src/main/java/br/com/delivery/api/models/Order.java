@@ -2,6 +2,9 @@ package br.com.delivery.api.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -10,9 +13,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne(targetEntity = Customer.class)
+    @JoinColumn(name = "id_customer", nullable = false)
     private Customer customer;
 
-    private List<Product> products;
+    @OneToMany
+    private Set<AssocProductOrder> products;
 
     private String address;
 
@@ -41,11 +47,11 @@ public class Order {
         this.id = id;
     }
 
-    public List<Product> getProducts() {
+    public Set<AssocProductOrder> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Set<AssocProductOrder> products) {
         this.products = products;
     }
 }
