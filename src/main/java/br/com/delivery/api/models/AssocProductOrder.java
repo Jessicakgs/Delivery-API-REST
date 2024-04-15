@@ -19,6 +19,8 @@ public class AssocProductOrder {
     @JoinColumn(name = "id_order")
     private Order order;
 
+    private Integer quantity;
+
     public Product getProduct() {
         return product;
     }
@@ -33,5 +35,21 @@ public class AssocProductOrder {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

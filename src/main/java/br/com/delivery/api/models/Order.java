@@ -2,7 +2,6 @@ package br.com.delivery.api.models;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,7 +12,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(targetEntity = Customer.class)
+    @ManyToOne
     @JoinColumn(name = "id_customer", nullable = false)
     private Customer customer;
 
