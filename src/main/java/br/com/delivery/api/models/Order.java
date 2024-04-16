@@ -1,5 +1,6 @@
 package br.com.delivery.api.models;
 
+import br.com.delivery.api.enums.OrderStatusEnum;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -12,6 +13,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
     @ManyToOne
     @JoinColumn(name = "id_customer", nullable = false)
     private Customer customer;
@@ -20,6 +22,9 @@ public class Order {
     private Set<AssocProductOrder> products;
 
     private String address;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatusEnum status = OrderStatusEnum.RECEIVED;
 
 
     public String getAddress() {
@@ -52,5 +57,13 @@ public class Order {
 
     public void setProducts(Set<AssocProductOrder> products) {
         this.products = products;
+    }
+
+    public OrderStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatusEnum status) {
+        this.status = status;
     }
 }

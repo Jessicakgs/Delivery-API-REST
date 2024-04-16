@@ -1,5 +1,6 @@
 package br.com.delivery.api.services;
 
+import br.com.delivery.api.enums.OrderStatusEnum;
 import br.com.delivery.api.models.Order;
 import br.com.delivery.api.repositories.CustomerRepository;
 import br.com.delivery.api.dto.request.OrderRequest;
@@ -32,6 +33,11 @@ public class OrderService {
         order.setCustomer(customer);
         order.setAddress(orderRequest.address());
         productService.saveAssocOrderProduct(products, orderRepository.save(order));
+    }
+
+    public OrderStatusEnum getOrderStatus(Integer orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+        return order.getStatus();
     }
 
 }

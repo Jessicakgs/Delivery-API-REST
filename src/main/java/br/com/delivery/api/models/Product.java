@@ -1,9 +1,14 @@
 package br.com.delivery.api.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLSelect;
+import org.hibernate.annotations.Where;
+import org.hibernate.annotations.processing.SQL;
 
 @Entity
 @Table(name = "products")
+@SQLDelete(sql = "update products set deleted = true where id = ?")
 public class Product {
 
     @Id
@@ -11,11 +16,13 @@ public class Product {
     private Integer id;
     private String name;
     private Integer price;
+    private Boolean deleted = false;
 
-    public Product(String name, Integer price, Integer id) {
+    public Product(String name, Integer price, Integer id, Boolean deleted) {
         this.name = name;
         this.price = price;
         this.id = id;
+        this.deleted = deleted;
     }
 
     public Product() {
@@ -45,4 +52,11 @@ public class Product {
         this.price = price;
     }
 
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
 }

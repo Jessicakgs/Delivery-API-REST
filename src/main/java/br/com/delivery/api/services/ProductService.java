@@ -7,7 +7,6 @@ import br.com.delivery.api.models.Order;
 import br.com.delivery.api.models.Product;
 import br.com.delivery.api.repositories.AssocOrderProductRepository;
 import br.com.delivery.api.repositories.ProductRepository;
-import ch.qos.logback.classic.LoggerContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,9 +34,9 @@ public class ProductService {
     public void updatedProduct(Integer id, ProductRequest updatedProduct) {
 
         Product product = productRepository.findById(id).orElseThrow(RuntimeException::new);
-            product.setName(updatedProduct.getName());
-            product.setPrice(updatedProduct.getPrice());
-            productRepository.save(product);
+        product.setName(updatedProduct.getName());
+        product.setPrice(updatedProduct.getPrice());
+        productRepository.save(product);
     }
 
 
@@ -56,5 +55,9 @@ public class ProductService {
     }
     public void deleteProduct(Integer id) {
         productRepository.deleteById(id);
+    }
+
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 }
