@@ -8,6 +8,7 @@ import br.com.delivery.api.models.AssocProductOrder;
 import br.com.delivery.api.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 
+import java.net.Proxy;
 import java.util.List;
 
 @Service
@@ -39,5 +40,15 @@ public class OrderService {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
         return order.getStatus();
     }
+
+    public void updatedOrder(Integer id, OrderRequest updatedOrder) {
+        Order order = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+        order.setCustomer(customerRepository.findById(updatedOrder.customerId()).orElseThrow(() -> new RuntimeException("Cliente não encontrado")));
+        order.setAddress(updatedOrder.address());
+        List<AssocProductOrder> products = updatedOrder.products().stream().map(productService::parseToAssocOrderProduct).toList();
+        productService.saveAssocOrderProduct(products, order);
+    }
+
+
 
 }
