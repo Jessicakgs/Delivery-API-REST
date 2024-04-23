@@ -2,9 +2,6 @@ package br.com.delivery.api.models;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLSelect;
-import org.hibernate.annotations.Where;
-import org.hibernate.annotations.processing.SQL;
 
 @Entity
 @Table(name = "products")
