@@ -22,4 +22,6 @@ public class CustomerService {
         customer.setNumberPhone(customerRequest.getNumberPhone());
         customerRepository.save(customer);
     }
+
+    public void deleteCustomer(Integer id) {customerRepository.deleteById(id);}
 }
