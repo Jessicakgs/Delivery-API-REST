@@ -5,6 +5,8 @@ import br.com.delivery.api.models.Customer;
 import br.com.delivery.api.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerService {
 
@@ -24,4 +26,16 @@ public class CustomerService {
     }
 
     public void deleteCustomer(Integer id) {customerRepository.deleteById(id);}
+
+    public void updateCustomer(Integer id, CustomerRequest updatedCustomer) {
+        Customer customer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+        customer.setName(updatedCustomer.getName());
+        customer.setNumberPhone(updatedCustomer.getNumberPhone());
+        customerRepository.save(customer);
+    }
+
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
+    }
 }

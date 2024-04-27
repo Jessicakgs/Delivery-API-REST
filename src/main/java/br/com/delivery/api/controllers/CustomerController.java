@@ -2,10 +2,13 @@ package br.com.delivery.api.controllers;
 
 
 import br.com.delivery.api.dto.request.CustomerRequest;
+import br.com.delivery.api.models.Customer;
 import br.com.delivery.api.services.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/customer")
@@ -29,4 +32,18 @@ public class CustomerController {
         return ResponseEntity.ok("Cliente excluído com sucesso!");
 
     }
-}
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateCustomer(@PathVariable Integer id, @RequestBody @Valid CustomerRequest updatedCustomer) {
+        customerService.updateCustomer(id, updatedCustomer);
+        return ResponseEntity.ok("Cliente atualizado com sucesso!");
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Customer>> getAllCustomers() {
+        List<Customer> customers = customerService.getAllCustomers();
+        return ResponseEntity.ok(customers);
+    }
+
+    }
+
